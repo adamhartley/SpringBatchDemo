@@ -14,7 +14,7 @@ To configure the batch job to run with Spring Boot config, ensure that the code 
          SpringApplication.run(Application.class, args);
     // end:: Spring Boot Launcher
 ```
-Conversely, the code for the XML launcher, found between the `XML Launcher` tags in the `Application.class` should be commented out.
+Conversely, the code for the XML launcher, found between the `XML Launcher` tags in the `Application.class` should be commented out. Double check that the XML job configuration code found in the `job-demo-config.xml` file is commented out between the `BEGIN` and `END` tags.
 
 ### XML Config
 Alternatively, to use the job configuration found in `job-demo-config.xml`, comment out the code between the `Spring Boot Launcher` tags in the  `Application.class`. The code found between the `XML Launcher` tags in `Application.class` should be uncommented:
