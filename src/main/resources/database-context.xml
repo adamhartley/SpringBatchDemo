@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <bean id="demoDataSource" class="org.springframework.jdbc.datasource.SingleConnectionDataSource">
+        <property name="driverClassName" value="${datasource.h2.driver-class-name}"/>
+        <property name="url" value="${datasource.h2.url}"/>
+        <property name="username" value="${datasource.h2.username}"/>
+        <property name="password" value="${datasource.h2.password}"/>
+    </bean>
+
+    <jdbc:initialize-database data-source="demoDataSource">
+        <jdbc:script location="classpath:schema-all.sql"/>
+    </jdbc:initialize-database>
+</beans>
