@@ -22,6 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.Resource;
+import com.springbatch.demo.callbacks.HeaderCallbackCsv;
 import com.springbatch.demo.domain.Person;
 import com.springbatch.demo.listeners.JobNotificationListener;
 import com.springbatch.demo.listeners.StepNotificationListener;
@@ -51,6 +52,9 @@ public class BatchConfiguration {
     @Autowired
     public StepNotificationListener stepNotificationListener;
 
+    @Autowired
+    public HeaderCallbackCsv headerCallbackCSV;
+
     @Value("${output.file}")
     Resource resource;
 
@@ -72,12 +76,16 @@ public class BatchConfiguration {
         logger.info("ENTER itemWriter()");
         FlatFileItemWriter flatFileItemWriter = new FlatFileItemWriter();
         flatFileItemWriter.setResource(resource);
+        // Line aggreator config
         DelimitedLineAggregator<Person> delimitedLineAggregator = new DelimitedLineAggregator<>();
         delimitedLineAggregator.setDelimiter(",");
         BeanWrapperFieldExtractor<Person> fieldExtractor = new BeanWrapperFieldExtractor<>();
         fieldExtractor.setNames(new String[] { "firstName", "lastName" }); // Need to match your bean's fields
         delimitedLineAggregator.setFieldExtractor(fieldExtractor);
+
         flatFileItemWriter.setLineAggregator(delimitedLineAggregator);
+        // CSV header callback
+        flatFileItemWriter.setHeaderCallback(headerCallbackCSV);
         return flatFileItemWriter;
     }
 
