@@ -86,6 +86,7 @@ public class BatchConfiguration {
         flatFileItemWriter.setLineAggregator(delimitedLineAggregator);
         // CSV header callback
         flatFileItemWriter.setHeaderCallback(headerCallbackCSV);
+
         return flatFileItemWriter;
     }
 
