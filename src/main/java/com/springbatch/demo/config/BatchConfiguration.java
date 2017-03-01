@@ -76,7 +76,7 @@ public class BatchConfiguration {
         logger.info("ENTER itemWriter()");
         FlatFileItemWriter flatFileItemWriter = new FlatFileItemWriter();
         flatFileItemWriter.setResource(resource);
-        // Line aggreator config
+        // Line aggregator config
         DelimitedLineAggregator<Person> delimitedLineAggregator = new DelimitedLineAggregator<>();
         delimitedLineAggregator.setDelimiter(",");
         BeanWrapperFieldExtractor<Person> fieldExtractor = new BeanWrapperFieldExtractor<>();
